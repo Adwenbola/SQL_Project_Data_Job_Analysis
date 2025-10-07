@@ -1,0 +1,27 @@
+# WHAT ARE THE TOP SKILL BASED ON SALARY
+
+SELECT skills,
+       ROUND(AVG(jb.salary_year_avg), 0) AS avg_salary
+FROM job_postings_fact jb 
+INNER JOIN skills_job_dim sjd
+ON jb.job_id = sjd.job_id
+INNER JOIN skills_dim sd
+ON sd.skill_id = sjd.skill_id
+WHERE jb.job_work_from_home = TRUE 
+  AND jb.job_title_short = 'Data Analyst'
+  AND jb.salary_year_avg IS NOT NULL
+GROUP BY skills
+ORDER BY avg_salary DESC
+LIMIT 25;
+
+/*
+| Trend                          | Example Skills                       | Why It Matters                              |
+| ------------------------------ | ------------------------------------ | ------------------------------------------- |
+| **Big Data Mastery**           | PySpark, Databricks, Airflow         | Handling massive data sets efficiently      |
+| **Cloud & DevOps Integration** | GCP, Kubernetes, Jenkins             | Deploying and automating data pipelines     |
+| **AI & ML Skills**             | Watson, DataRobot, Scikit-learn      | Enabling predictive analytics               |
+| **Advanced Python Stack**      | Pandas, NumPy, Jupyter               | Core data manipulation and analysis         |
+| **Database Expertise**         | PostgreSQL, Couchbase, Elasticsearch | Managing modern data storage systems        |
+| **Cross-disciplinary Skills**  | Go, Swift, GitLab                    | Merging analytics with software engineering |
+
+*/

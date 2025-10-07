@@ -50,6 +50,7 @@ WITH remote_skills_count AS (
     WHERE job_work_from_home = TRUE AND job_title_short = 'Data Analyst'
     GROUP BY skill_id
 )
+
 SELECT remote_skills_count.skill_id, skills_dim.skills, remote_skills_count.skills_to_job
 FROM remote_skills_count
 JOIN skills_dim 
